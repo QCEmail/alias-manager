@@ -1,13 +1,8 @@
-﻿DROP TYPE IF EXISTS usertype;
-DROP TYPE IF EXISTS statustype;
-
+﻿
 CREATE TYPE usertype AS ENUM ('admin', 'user');
 
 CREATE TYPE statustype AS ENUM ('active', 'disabled');
 
-DROP TABLE IF EXISTS "users";
-DROP TABLE IF EXISTS "addresses";
-DROP TABLE IF EXISTS "virtualaliases";
 
 CREATE TABLE "users" (
   "userid" bigserial PRIMARY KEY,

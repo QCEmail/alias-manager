@@ -53,6 +53,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 `createdb -O aliasmgr aliasmanager`
 
-* Now you're ready to run the SQL scripts
+* Now you're ready to run the SQL creation script.
 
-`psql -U aliasmgr -d aliasmanager -a -f scripts/create-user-table.sql`
+`psql -U aliasmgr -d aliasmanager -a -f scripts/create.sql`
+
+
