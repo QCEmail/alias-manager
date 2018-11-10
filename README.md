@@ -46,9 +46,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Create Postgresql user and database
 
 * This will prompt you for the password to use
+
 `createuser --pwprompt aliasmgr`
 
 * Create the database
+
 `createdb -O aliasmgr aliasmanager`
 
-Now you're ready to run the SQL scripts
+* Now you're ready to run the SQL scripts
+
+`psql -U aliasmgr -d aliasmanager -a -f scripts/create-user-table.sql`
