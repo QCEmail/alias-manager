@@ -24,12 +24,19 @@ export default class LoginForm extends Component {
   }
 
   componentDidMount() {
-    this.formRef.current.addEventListener('keydown', this.attemptLogin, false);
+    this.formRef.current.addEventListener('keydown', this.handleKeydown, false);
   }
 
   componentWillUnmount() {
-    this.formRef.current.removeEventListener('keydown', this.attemptLogin, false);
+    this.formRef.current.removeEventListener('keydown', this.handleKeydown, false);
   }
+
+  handleKeydown = (e) => {
+    if (e.which === 13 || e.keyCode === 13) {
+      e.preventDefault();
+      this.attemptLogin();
+    }
+  };
 
   attemptLogin = () => {
     const { authenticateUser } = this.props;
