@@ -15,7 +15,7 @@ CREATE TABLE "users" (
   "password" text CHECK(char_length("password")<=100) NOT NULL,
   "type" usertype,
   "displayname" text NOT NULL,
-  "mailbox" text CHECK(char_length("address")<=254) NOT NULL UNIQUE,
+  "mailbox" text CHECK(char_length("mailbox")<=254) NOT NULL UNIQUE
 );
 
 CREATE TABLE "addresses" (
@@ -23,10 +23,10 @@ CREATE TABLE "addresses" (
   "creator" bigserial REFERENCES "users"("userid"),
   "createdate" TIMESTAMP NOT NULL,
   "status" statustype,
-  "notes" text,
-)
+  "notes" text
+);
 
 CREATE TABLE "virtualaliases" (
   "userid" bigserial REFERENCES "users"("userid"),
-  "address" text REFERENCES "addresses"("address"),
-)
+  "address" text REFERENCES "addresses"("address")
+);
