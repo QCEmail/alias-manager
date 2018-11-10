@@ -1,50 +1,79 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Map } from 'immutable';
 
+import * as UserActions from './redux/user-duck';
 import LoginForm from './LoginForm';
+import Header from './Header';
+import AliasList from './AliasList';
+import AddAlias from './AddAlias';
+import Admin from './Admin';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      authenticated: false,
-      user: null,
-    };
-  }
-
-  authenticateUser = (username, password) => {
-    if (!username && !password) {
-      return Promise.reject('Enter a username and password');
-    }
-    if (username === 'duh') {
-      return Promise.reject('The username and password you provided is not valid');
-    }
-    this.setState({
-      authenticated: true,
-      user: {
-        type: 'admin', displayname: 'Admin', mailbox: 'admin@test.com', userid: 1,
-      }
-    });
-    return Promise.resolve();
+  static propTypes = {
+    actions: PropTypes.shape({
+      authenticateUser: PropTypes.func.isRequired,
+      logoutUser: PropTypes.func.isRequired,
+    }),
+    userData: PropTypes.instanceOf(Map).isRequired,
   };
 
-  render() {
-    const { authenticated } = this.state;
+  static mapStateToProps(state) {
+    return {
+      userData: state.user,
+    };
+  };
 
-    if (!authenticated) {
+  static mapDispatchToProps(dispatch) {
+    const actions =_.assign({}, UserActions);
+    return {
+      actions: bindActionCreators(actions, dispatch),
+    }
+  }
+
+  render() {
+    const { userData, actions } = this.props;
+    const user = userData.get('user');
+    const aliases = userData.get('aliases');
+
+    if (!user) {
       return (
-        <LoginForm authenticateUser={this.authenticateUser}/>
+        <LoginForm authenticateUser={actions.authenticateUser} />
       );
     }
 
     return (
       <div className="App">
-        <header className="App-header">
-          Stuff
-        </header>
+        <Header user={user} onLogout={actions.logoutUser} />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={props => (
+              <AliasList {...props} aliases={aliases} />
+            )}
+          />
+          <Route
+            path="/admin"
+            render={props => (
+              <Admin {...props} user={user} />
+            )}
+          />
+          <Route
+            path="/addAlias"
+            render={props => (
+              <AddAlias {...props} user={user} />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(App.mapStateToProps, App.mapDispatchToProps)(App);

@@ -1,0 +1,9 @@
+.actions {
+  float: left;
+}
+.actions button {
+  padding: 0 5px;
+}
+.actions .fa-ban {
+  padding: 0 2px;
+}
