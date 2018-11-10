@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       authenticated: false,
+      user: null,
     };
   }
 
@@ -18,7 +19,12 @@ class App extends Component {
     if (username === 'duh') {
       return Promise.reject('The username and password you provided is not valid');
     }
-    this.setState({ authenticated: true });
+    this.setState({
+      authenticated: true,
+      user: {
+        type: 'admin', displayname: 'Admin', mailbox: 'admin@test.com', userid: 1,
+      }
+    });
     return Promise.resolve();
   };
 
