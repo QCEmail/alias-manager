@@ -44,3 +44,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 Can I push to master? I should not be able to
+
+New rule test
