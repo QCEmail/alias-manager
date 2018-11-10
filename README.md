@@ -42,3 +42,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Create Postgresql user and database
+
+* This will prompt you for the password to use
+`createuser --pwprompt aliasmgr`
+
+* Create the database
+`createdb -O aliasmgr aliasmanager`
+
+Now you're ready to run the SQL scripts
