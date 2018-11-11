@@ -57,4 +57,25 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 `psql -U aliasmgr -d aliasmanager -a -f scripts/create.sql`
 
+## API Endpoints
 
+* /auth - POST { username: string, password: encoded-string }
+  * return { userid, type, displayname, mailbox } AND set cookie
+* /whoami - GET
+  * return { userid, type, displayname, mailbox }
+  * or 401
+* /aliases - GET \(?userid=id\)
+  * return { aliases: \[ { address, status, createdby: { displayname }, createdate, note, isGroup }, ... \]
+  * or 401 if not auth'd or 403 not admin
+* /alias - POST { address, \(note\), action={add, update, disable} }
+  * return 200 or 400
+  * return 403 if address already exists
+* /user - POST { type, displayname, mailbox, action={add, update} }
+  * return 200
+  * or 403 if not admin and adding user OR changing type on update
+* /groupaliases - GET
+  * return { "address": \[ { userid, displayname, mailbox }, ... \], ...\] }
+  * or 403 if not admin
+* /groupalias - POST  { address, \(note\), \(userid\), action={add, update, disable} }
+  * return 200
+  * or 403 if not admin
