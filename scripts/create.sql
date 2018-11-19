@@ -18,7 +18,8 @@ CREATE TABLE "addresses" (
   "creator" bigserial REFERENCES "users"("userid"),
   "createdate" TIMESTAMP NOT NULL,
   "status" statustype,
-  "notes" text
+  "notes" text,
+  "groupAllowed" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "virtualaliases" (
