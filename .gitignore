@@ -73,8 +73,8 @@ typings/
 # testing
 /coverage
 
-# production
-/build
+# This ignores the Bazel BUILD file(s)
+#/build
 
 # misc
 .DS_Store
@@ -105,7 +105,8 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
-.classpath
+# I want to save my .classpath
+#.classpath
 .settings/
 .loadpath
 
@@ -114,3 +115,7 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+# bazel symlinks
+bazel*
+/bin/

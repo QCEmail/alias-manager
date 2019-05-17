@@ -79,3 +79,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * /groupalias - POST  { address, \(note\), \(userid\), action={add, update, disable} }
   * return 200
   * or 403 if not admin
+
+## Building and running the Java service
+
+* Install the Bazel build tool `brew install bazel`
+* Build the service jar `bazel build QcEmailAliasService_deploy.jar`
+* Run the Java service `java -jar bazel-bin/QcEmailAliasService_deploy.jar`
+* The Java service listens on port 8888 by default
