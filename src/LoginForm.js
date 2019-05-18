@@ -56,9 +56,6 @@ export default class LoginForm extends Component {
 
     this.setState({ userError: false, pwdError: false, authenticating: true }, () => {
       authenticateUser(username, password)
-        .then(() => {
-          this.setState({ authenticating: false });
-        })
         .catch(authError => {
           this.setState({ authenticating: false, authError });
         });
@@ -85,7 +82,7 @@ export default class LoginForm extends Component {
                 valid={!userError}
                 innerRef={this.usernameRef}
               />
-              <FormFeedback invalid>User Name is required</FormFeedback>
+              <FormFeedback invalid="true">User Name is required</FormFeedback>
             </FormGroup>
             <FormGroup>
               <Label for="password">Password</Label>
@@ -98,7 +95,7 @@ export default class LoginForm extends Component {
                 valid={!pwdError}
                 innerRef={this.passwordRef}
               />
-              <FormFeedback invalid>Password is required</FormFeedback>
+              <FormFeedback invalid="true">Password is required</FormFeedback>
             </FormGroup>
             <Button
               onClick={this.attemptLogin}
