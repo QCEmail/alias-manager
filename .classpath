@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="lib" path="bazel-alias-manager/external/javax-servlet-api/jar/downloaded.jar"/>
+	<classpathentry kind="lib" path="bazel-alias-manager/external/jetty-util/jar/downloaded.jar"/>
+	<classpathentry kind="lib" path="bazel-alias-manager/external/jetty-http/jar/downloaded.jar"/>
+	<classpathentry kind="lib" path="bazel-alias-manager/external/jetty-io/jar/downloaded.jar"/>
+	<classpathentry kind="lib" path="bazel-alias-manager/external/jetty-server/jar/downloaded.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
