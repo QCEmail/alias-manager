@@ -33,7 +33,7 @@ export const TEST_ALIASES = [{
   status: 'active',
   notes: 'this is a really awesome website that I love',
 },{
-  address: 'alias5@test.com',
+  address: 'alias5@testing.com',
   status: 'disabled',
   notes: 'spammer got a hold of this',
 }];

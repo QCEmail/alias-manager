@@ -15,6 +15,8 @@ export default class LoginForm extends Component {
     this.passwordRef = React.createRef();
     this.formRef = React.createRef();
 
+    this.mounted = false;
+
     this.state = {
       authError: null,
       userError: false,
@@ -24,10 +26,12 @@ export default class LoginForm extends Component {
   }
 
   componentDidMount() {
+    this.mounted = true;
     this.formRef.current.addEventListener('keydown', this.handleKeydown, false);
   }
 
   componentWillUnmount() {
+    this.mounted = false;
     this.formRef.current.removeEventListener('keydown', this.handleKeydown, false);
   }
 
@@ -57,7 +61,9 @@ export default class LoginForm extends Component {
     this.setState({ userError: false, pwdError: false, authenticating: true }, () => {
       authenticateUser(username, password)
         .catch(authError => {
-          this.setState({ authenticating: false, authError });
+          if (this.mounted) {
+            this.setState({ authenticating: false, authError });
+          }
         });
     });
   };
@@ -78,7 +84,7 @@ export default class LoginForm extends Component {
                 name="username"
                 id="username"
                 placeholder="User name"
-                invalid={userError}
+                invalid={!!userError}
                 valid={!userError}
                 innerRef={this.usernameRef}
               />
@@ -91,7 +97,7 @@ export default class LoginForm extends Component {
                 name="password"
                 id="password"
                 placeholder="Password"
-                invalid={pwdError}
+                invalid={!!pwdError}
                 valid={!pwdError}
                 innerRef={this.passwordRef}
               />

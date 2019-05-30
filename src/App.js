@@ -19,6 +19,7 @@ class App extends Component {
     actions: PropTypes.shape({
       authenticateUser: PropTypes.func.isRequired,
       logoutUser: PropTypes.func.isRequired,
+      whoAmI: PropTypes.func.isRequired,
     }),
     userData: PropTypes.instanceOf(Map).isRequired,
   };
@@ -36,10 +37,17 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    const { actions } = this.props;
+//    actions.whoAmI();
+  }
+
   render() {
     const { userData, actions } = this.props;
     const user = userData.get('user');
     const aliases = userData.get('aliases');
+    const currentDomain = userData.get('currentDomain');
+    const otherDomains = userData.get('otherDomains');
 
     if (!user) {
       return (
@@ -67,7 +75,7 @@ class App extends Component {
           <Route
             path="/addAlias"
             render={props => (
-              <AddAlias {...props} user={user} />
+              <AddAlias {...props} currentDomain={currentDomain} otherDomains={otherDomains} actions={actions} />
             )}
           />
         </Switch>
